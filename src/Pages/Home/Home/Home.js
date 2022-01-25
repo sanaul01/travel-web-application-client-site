@@ -1,12 +1,12 @@
 import React from "react";
 import Banner from "../Banner/Banner";
 import Footer from "../Footer/Footer";
-import NavBar from "../NavBar/NavBar";
+import Navigation from "../Navigation/Navigation";
 
 const Home = () => {
   return (
     <div>
-      <NavBar></NavBar>
+      <Navigation></Navigation>
       <Banner></Banner>
       <Footer></Footer>
     </div>
