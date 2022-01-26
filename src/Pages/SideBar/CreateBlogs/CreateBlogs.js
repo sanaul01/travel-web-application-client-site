@@ -16,7 +16,22 @@ const CreateBlogs = () => {
     };
 
     const handleOnSubmit = (e) => {
+        const blog = {
+            ...loadingData
+        }
         
+        fetch("http://localhost:5000/blogs", {
+            method: "POST",
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(blog)
+        })
+        .then(res => res.json())
+        .then(data => {
+            // alert method will be added here
+            console.log(data)
+        })
         e.preventDefault();
     };
 
