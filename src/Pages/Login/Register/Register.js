@@ -8,13 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
 const Register = () => {
 
   const [loginData, setLoginData] = useState({});
   const { user, registerUser, isLoading, authError } = useAuth();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const field = e.target.name;
@@ -29,7 +32,7 @@ const Register = () => {
       alert("Your password did not match");
       return;
     }
-    registerUser(loginData.email, loginData.password);
+    registerUser(loginData.email, loginData.password, location, navigate);
     e.preventDefault();
   };
   return (

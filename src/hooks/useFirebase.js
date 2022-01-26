@@ -23,6 +23,8 @@ const useFirebase = () => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        const destination = location?.state?.from || '/';
+        navigate(destination);
         setAuthError("");
         
       })
@@ -38,7 +40,7 @@ const useFirebase = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const destination = location?.state?.from || '/';
-                navigate(destination);
+        navigate(destination);
         setAuthError("");
       })
       .catch((error) => {
