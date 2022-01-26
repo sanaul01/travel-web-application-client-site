@@ -5,6 +5,7 @@ import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
 import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
 import Register from "./Pages/Login/Register/Register";
+import CreateBlogs from "./Pages/SideBar/CreateBlogs/CreateBlogs";
 import SideBar from "./Pages/SideBar/SideBar/SideBar";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/sidebar" element={<PrivateRoute><SideBar></SideBar></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/createblogs" element={<CreateBlogs />} />
         </Routes>
       </AuthProvider>
     </div>
