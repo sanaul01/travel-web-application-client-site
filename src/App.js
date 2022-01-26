@@ -3,6 +3,7 @@ import "./App.css";
 import AuthProvider from "./Contexts/AuthProvider/AuthProvider";
 import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
+import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
 import Register from "./Pages/Login/Register/Register";
 import SideBar from "./Pages/SideBar/SideBar/SideBar";
 
@@ -13,7 +14,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/sidebar" element={<SideBar />} />
+          <Route path="/sidebar" element={<PrivateRoute><SideBar></SideBar></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

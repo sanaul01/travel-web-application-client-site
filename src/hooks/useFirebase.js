@@ -19,11 +19,12 @@ const useFirebase = () => {
   const auth = getAuth();
 
   // Registation new user method
-  const registerUser = (email, password) => {
+  const registerUser = (email, password, location, navigate) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setAuthError("");
+        
       })
       .catch((error) => {
         setAuthError(error.message);
@@ -32,10 +33,12 @@ const useFirebase = () => {
   };
 
   //   Login user method
-  const loginUser = (email, password) => {
+  const loginUser = (email, password, location, navigate) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        const destination = location?.state?.from || '/';
+                navigate(destination);
         setAuthError("");
       })
       .catch((error) => {
