@@ -21,7 +21,7 @@ const CreateBlogs = () => {
             ...loadingData
         }
         
-        fetch("http://localhost:5000/blogs", {
+        fetch("https://peaceful-sea-14435.herokuapp.com/blogs", {
             method: "POST",
             headers: {
                 'content-type' : 'application/json'

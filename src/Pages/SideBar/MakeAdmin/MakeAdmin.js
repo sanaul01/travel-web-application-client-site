@@ -14,7 +14,7 @@ const MakeAdmin = () => {
   const handleMakeAdmin = (e) => {
     const user = { email };
 
-    fetch("http://localhost:5000/users/admin", {
+    fetch("https://peaceful-sea-14435.herokuapp.com/users/admin", {
       method: "PUT",
       headers: {
           'authorization' : `Bearer ${token}`,
