@@ -15,12 +15,16 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
+import { Outlet, Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const drawerWidth = 200;
 
 function SideBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { admin } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -30,6 +34,26 @@ function SideBar(props) {
     <div>
       <Toolbar />
       <Divider />
+
+      <Link to={`/home`}>
+        <Button color="inherit">Home</Button>
+      </Link>
+      <br />
+      <Link to={`/sidebar`}>
+        <Button color="inherit">Sidebar</Button>
+      </Link>
+      <br />
+      {admin && (
+        <Box>
+          <Link to={`/sidebar/makeadmin`}>
+            <Button color="inherit">Make Admin</Button>
+          </Link>
+          <Link to={`/sidebar/createblogs`}>
+            <Button color="inherit">Create Blogs</Button>
+          </Link>
+        </Box>
+      )}
+
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
           <ListItem button key={text}>
@@ -117,9 +141,8 @@ function SideBar(props) {
         }}
       >
         <Toolbar />
-        <Typography paragraph>
-          Something will be added here
-        </Typography>
+
+        <Outlet />
       </Box>
     </Box>
   );

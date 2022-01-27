@@ -4,8 +4,8 @@ import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import spinner from "../../../images/spinner.gif";
 
-const PrivateRoute = ({ children, ...rest }) => {
-  const { user, isLoading } = useAuth();
+const AdminRoute = ({ children, ...rest }) => {
+  const { user, admin, isLoading } = useAuth();
   let location = useLocation();
 
   //spinner
@@ -25,11 +25,11 @@ const PrivateRoute = ({ children, ...rest }) => {
     );
   }
   //returns protected routes
-  if (user?.email) {
+  if (user?.email && admin) {
     return children;
   }
 
-  return <Navigate to="/login" state={{ from: location }} />;
+  return <Navigate to="/" state={{ from: location }} />;
 };
 
-export default PrivateRoute;
+export default AdminRoute;
