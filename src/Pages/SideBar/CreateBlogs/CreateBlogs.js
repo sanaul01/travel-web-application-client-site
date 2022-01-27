@@ -1,9 +1,10 @@
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import { Alert, Button, Container, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 const CreateBlogs = () => {
 
     const [loadingData, setLoadingData] = useState({});
+    const [addedSuccessfully, setAddedSuccessfully] = useState(false);
 
 
     const handleOnBlur = (e) => {
@@ -30,7 +31,10 @@ const CreateBlogs = () => {
         .then(res => res.json())
         .then(data => {
             // alert method will be added here
-            console.log(data)
+            if(data.insertedId){
+              setAddedSuccessfully(true)
+            }
+            
         })
         e.preventDefault();
     };
@@ -39,6 +43,7 @@ const CreateBlogs = () => {
     <Container>
       <Grid container spacing={2}>
         <Grid item sx={{ mt: 6 }} xs={12} sm={12}>
+          {addedSuccessfully && <Alert severity="success">Added successfully</Alert>}
           <Typography variant="body1" gutterBottom>
             Create Blogs
           </Typography>
