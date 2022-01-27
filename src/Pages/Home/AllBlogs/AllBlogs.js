@@ -24,6 +24,9 @@ const AllBlogs = () => {
               <Typography>
                   {blog.title}
               </Typography>
+              <Typography>
+                  {blog.description}
+              </Typography>
           </Grid>
         ))}
       </Grid>
