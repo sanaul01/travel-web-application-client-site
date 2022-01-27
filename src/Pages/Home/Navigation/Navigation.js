@@ -28,12 +28,6 @@ const Navigation = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Travelar
           </Typography>
-          <Link
-            style={{ textDecoration: "none", color: "white" }}
-            to="/sidebar"
-          >
-            <Button color="inherit">Sidebar</Button>
-          </Link>
 
           {user?.email ? (
             <Box>
