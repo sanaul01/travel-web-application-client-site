@@ -1,13 +1,21 @@
-import { Alert, Button, Container, Grid, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Alert, Button, Container, Grid, TextField, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const CreateBlogs = () => {
+const UpdateBlog = () => {
 
-    const [loadingData, setLoadingData] = useState({});
+    const { blogId } = useParams();
+    const [blog, setBlog] = useState();
     const [addedSuccessfully, setAddedSuccessfully] = useState(false);
+    const [loadingData, setLoadingData] = useState({});
 
+    useEffect(() => {
+        fetch(`https://peaceful-sea-14435.herokuapp.com/blogs/${blogId}`)
+          .then((res) => res.json())
+          .then((data) => setBlog(data));
+      }, []);
 
-    const handleOnBlur = (e) => {
+    const handleOnBlur = e =>{
         const field = e.target.name;
         const value = e.target.value;
         const newLoadingData = { ...loadingData };
@@ -16,60 +24,53 @@ const CreateBlogs = () => {
         e.preventDefault();
     };
 
-    const handleOnSubmit = (e) => {
-        const blog = {
-            ...loadingData
-        }
-        
-        fetch("https://peaceful-sea-14435.herokuapp.com/blogs", {
-            method: "POST",
+    const handleUpdate = e =>{
+        fetch(`http://localhost:5000/blogs/${blogId}`, 
+        {
+            method: 'PUT',
             headers: {
                 'content-type' : 'application/json'
             },
             body: JSON.stringify(blog)
         })
-        .then(res => res.json())
-        .then(data => {
-            // alert method will be added here
-            if(data.insertedId){
-              setAddedSuccessfully(true)
-            }
-            
-        })
-        e.preventDefault();
-    };
+        .then()
 
-  return (
-    <Container>
+        e.preventDefault();
+    }
+
+    console.log(blog?.title)
+
+    return (
+        <Container>
       <Grid container spacing={2}>
         <Grid item sx={{ mt: 6 }} xs={12} sm={12}>
           {addedSuccessfully && <Alert severity="success">Added successfully</Alert>}
           <Typography style={{fontWeight: 700, fontSize: 23}} variant="body1" gutterBottom>
-            Create Blogs
+            Update Blogs
           </Typography>
-          <form onSubmit={handleOnSubmit}>
+          <form onSubmit={handleUpdate}>
             <TextField
               sx={{ width: "75%", m: 1 }}
               id="standard-basic"
-              label="Image Url"
               name="image"
+              value={blog?.image}
               onBlur={handleOnBlur}
               variant="standard"
             />
             <TextField
               sx={{ width: "75%", m: 1 }}
               id="standard-basic"
-              label="Title"
               name="title"
               type="text"
+              value={blog?.title}
               onBlur={handleOnBlur}
               variant="standard"
             />
             <TextField
               sx={{ width: "75%", m: 1 }}
               id="standard-basic"
-              label="Traveler Info"
               name="info"
+              value={blog?.info}
               onBlur={handleOnBlur}
               type="text"
               variant="standard"
@@ -77,8 +78,8 @@ const CreateBlogs = () => {
             <TextField
               sx={{ width: "75%", m: 1 }}
               id="standard-basic"
-              label="Description"
               name="description"
+              value={blog?.description}
               onBlur={handleOnBlur}
               type="text"
               variant="standard"
@@ -86,8 +87,8 @@ const CreateBlogs = () => {
             <TextField
               sx={{ width: "75%", m: 1 }}
               id="standard-basic"
-              label="Category"
               name="category"
+              value={blog?.category}
               onBlur={handleOnBlur}
               type="text"
               variant="standard"
@@ -95,8 +96,8 @@ const CreateBlogs = () => {
             <TextField
               sx={{ width: "75%", m: 1 }}
               id="standard-basic"
-              label="Cost"
               name="cost"
+              value={blog?.cost}
               onBlur={handleOnBlur}
               type="number"
               variant="standard"
@@ -104,8 +105,8 @@ const CreateBlogs = () => {
             <TextField
               sx={{ width: "75%", m: 1 }}
               id="standard-basic"
-              label="Location"
-              name="loaction"
+              name="location"
+              value={blog?.location}
               onBlur={handleOnBlur}
               type="text"
               variant="standard"
@@ -115,13 +116,13 @@ const CreateBlogs = () => {
               type="submit"
               variant="contained"
             >
-              Create Blogs
+              Update
             </Button>
           </form>
         </Grid>
       </Grid>
     </Container>
-  );
+    );
 };
 
-export default CreateBlogs;
+export default UpdateBlog;

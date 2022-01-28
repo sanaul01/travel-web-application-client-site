@@ -3,6 +3,7 @@ import "./App.css";
 import AuthProvider from "./Contexts/AuthProvider/AuthProvider";
 import DetailBlogs from "./Pages/Home/AllBlogs/DetailBlogs/DetailBlogs";
 import Home from "./Pages/Home/Home/Home";
+import UpdateBlog from "./Pages/Home/UpdateBlog/UpdateBlog";
 import AdminRoute from "./Pages/Login/AdminRoute/AdminRoute";
 import Login from "./Pages/Login/Login/Login";
 import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/details/:blogId" element={<PrivateRoute><DetailBlogs></DetailBlogs></PrivateRoute>} />
+          <Route path="/update/:blogId" element={<PrivateRoute><UpdateBlog/></PrivateRoute>} />
 
           <Route
             path="/sidebar"

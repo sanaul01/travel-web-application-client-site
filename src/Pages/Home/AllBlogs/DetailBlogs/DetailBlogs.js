@@ -2,10 +2,12 @@ import { Button, Grid, Typography } from "@mui/material";
 import { lightGreen } from "@mui/material/colors";
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import useAuth from "../../../../hooks/useAuth";
 
 const DetailBlogs = () => {
   const { blogId } = useParams();
   const [blog, setBlog] = useState();
+  const { admin } = useAuth();
 
   useEffect(() => {
     fetch(`https://peaceful-sea-14435.herokuapp.com/blogs/${blogId}`)
@@ -23,7 +25,7 @@ const DetailBlogs = () => {
         </Grid>
         <Grid xs={12} sm={6}>
           <Typography>{blog?.title}</Typography>
-          <Typography>{blog?.loaction}</Typography>
+          <Typography>{blog?.location}</Typography>
           <Typography>{blog?.info}</Typography>
           <Typography>{blog?.category}</Typography>
           <Typography>${blog?.cost}</Typography>
@@ -32,6 +34,10 @@ const DetailBlogs = () => {
               <Button sx={{ my: 3, backgroundColor: lightGreen[700] }}
                 variant="contained">Back to home</Button>
           </NavLink>
+          { admin && <NavLink style={{ textDecoration: "none", }} to={ `/update/${blog?._id}`}>
+              <Button sx={{ my: 3, mx: 3, backgroundColor: lightGreen[700] }}
+                variant="contained">Update</Button>
+          </NavLink>}
         </Grid>
       </Grid>
     </Grid>
