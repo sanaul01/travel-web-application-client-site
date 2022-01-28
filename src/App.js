@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AuthProvider from "./Contexts/AuthProvider/AuthProvider";
+import DetailBlogs from "./Pages/Home/AllBlogs/DetailBlogs/DetailBlogs";
 import Home from "./Pages/Home/Home/Home";
 import AdminRoute from "./Pages/Login/AdminRoute/AdminRoute";
 import Login from "./Pages/Login/Login/Login";
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/details/:blogId" element={<PrivateRoute><DetailBlogs></DetailBlogs></PrivateRoute>} />
 
           <Route
             path="/sidebar"

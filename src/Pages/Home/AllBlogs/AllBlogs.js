@@ -1,15 +1,25 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const AllBlogs = () => {
     const [blogs, setBlogs] = useState();
+    const [pageCount, setPageCount] = useState(0);
+    const [page, setPage] = useState(0);
 
+
+    const size = 10;
 
     useEffect(()=>{
-        fetch('https://peaceful-sea-14435.herokuapp.com/blogs')
+        fetch(`https://peaceful-sea-14435.herokuapp.com/blogs?page=${page}&&size=${size}`)
         .then(res => res.json())
-        .then(data => setBlogs(data))
-    } , [])
+        .then(data => {
+          setBlogs(data.blogs)
+          const count = data.count;
+          const pageNumber = Math.ceil(count / size);
+          setPageCount(pageNumber);
+        })
+    } , [page])
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -27,9 +37,23 @@ const AllBlogs = () => {
               <Typography>
                   {blog.description}
               </Typography>
+              <NavLink to={`/details/${blog._id}`}>
+                <Button>Details</Button>
+              </NavLink>
           </Grid>
         ))}
       </Grid>
+      <Grid className="pagination">
+          {[...Array(pageCount).keys()].map((number) => (
+            <button
+              className={number === page ? "selected" : ""}
+              key={number}
+              onClick={() => setPage(number)}
+            >
+              {number}
+            </button>
+          ))}
+        </Grid>
     </Box>
   );
 };
