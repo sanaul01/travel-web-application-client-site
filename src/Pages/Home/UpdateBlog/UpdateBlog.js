@@ -25,15 +25,15 @@ const UpdateBlog = () => {
     };
 
     const handleUpdate = e =>{
-        fetch(`http://localhost:5000/blogs/${blogId}`, 
-        {
-            method: 'PUT',
-            headers: {
-                'content-type' : 'application/json'
-            },
-            body: JSON.stringify(blog)
-        })
-        .then()
+        // fetch(`http://localhost:5000/blogs/${blogId}`, 
+        // {
+        //     method: 'PUT',
+        //     headers: {
+        //         'content-type' : 'application/json'
+        //     },
+        //     body: JSON.stringify(blog)
+        // })
+        // .then()
 
         e.preventDefault();
     }
