@@ -29,26 +29,27 @@ function SideBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  
 
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
 
-      <Link to={`/home`}>
+      <Link style={{textDecoration: 'none'}} to={`/home`}>
         <Button color="inherit">Home</Button>
       </Link>
       <br />
-      <Link to={`/sidebar`}>
+      <Link style={{textDecoration: 'none'}} to={`/sidebar`}>
         <Button color="inherit">Sidebar</Button>
       </Link>
       <br />
       {admin && (
         <Box>
-          <Link to={`/sidebar/makeadmin`}>
+          <Link style={{textDecoration: 'none'}} to={`/sidebar/makeadmin`}>
             <Button color="inherit">Make Admin</Button>
           </Link>
-          <Link to={`/sidebar/createblogs`}>
+          <Link style={{textDecoration: 'none'}} to={`/sidebar/createblogs`}>
             <Button color="inherit">Create Blogs</Button>
           </Link>
         </Box>

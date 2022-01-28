@@ -1,6 +1,7 @@
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
+import { lightGreen } from "@mui/material/colors";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 const DetailBlogs = () => {
   const { blogId } = useParams();
@@ -11,7 +12,7 @@ const DetailBlogs = () => {
       .then((res) => res.json())
       .then((data) => setBlog(data));
   }, []);
-  console.log(blog);
+  
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12}>
@@ -27,6 +28,10 @@ const DetailBlogs = () => {
           <Typography>{blog?.category}</Typography>
           <Typography>${blog?.cost}</Typography>
           <Typography>${blog?.description}</Typography>
+          <NavLink style={{ textDecoration: "none" }} to='/home'>
+              <Button sx={{ my: 3, backgroundColor: lightGreen[700] }}
+                variant="contained">Back to home</Button>
+          </NavLink>
         </Grid>
       </Grid>
     </Grid>
